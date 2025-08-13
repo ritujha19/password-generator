@@ -1,10 +1,22 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 
 function App() {
   const [length, setLength] = useState(8);
   const [numAllow, setNumAllow] = useState(false);
   const [charAllow, setCharAllow] = useState(false);
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+  AOS.init({
+    duration: 700,           // duration of animation in ms
+    once: false,              // only animate once
+    easing: 'ease-out-cubic' // easing type
+  });
+}, []);
+
 
   const generatePassword = useCallback(() => {
     let pass = "";
@@ -22,11 +34,11 @@ function App() {
 
   return (
     <>
-      <div className=" w-full h-screen p-10 text-center bg-gradient-to-br from-blue-950 to-purple-950  rounded-lg">
-        <h1 className="text-4xl px-4 py-4 text-amber-200">
+      <div className=" w-full h-screen p-10 text-center bg-gradient-to-br from-gray-800 via-gray-700 to-gray-950 rounded-lg">
+        <h1 className="text-4xl px-4 py-4 text-amber-200" data-aos = "zoom-in-right">
           Password Generator
         </h1>
-        <div className="flex shadow rounded-lg overflow-hidden mb-4 items-center justify-center">
+        <div className="flex shadow rounded-lg overflow-hidden mb-4 items-center justify-center" data-aos="zoom-in-right">
           <input
             type="text"
             value={password}
@@ -34,7 +46,7 @@ function App() {
             placeholder="Password"
             readOnly
           />
-          <button className="h-12 bg-purple-200 text-black rounded-r-2xl">Copy</button>
+          <button className="h-12 bg-blue-600 text-white shrink-0 rounded-r-2xl text-2xl">Copy</button>
         </div>
         
       </div>
