@@ -21,7 +21,7 @@ It allows users to generate secure passwords with options for length, numbers, s
 
 ## 🖼️ Demo
 
-[Click here to see the live demo](#) *(Add your live project link here)*
+[Click here to see the live demo](https://ritujha19.github.io/password-generator/) *(Add your live project link here)*
 
 ---
 
