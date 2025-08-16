@@ -30,11 +30,6 @@ React.js, JavaScript (ES6+), CSS3, Clipboard API
 
 ---
 
-## 🤝 Contributing
-Feel free to fork this repo and submit pull requests for improvements.
-
----
-
 ## 👩‍💻 Author
 **Ritu Rani**  
 [GitHub](https://github.com/ritujha19) | [LinkedIn](https://www.linkedin.com/in/ritu-rani-b18992322)
