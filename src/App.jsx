@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,6 +16,8 @@ function App() {
   const [showToast, setShowToast] = useState(false);
   const [autoGenerateOnCopy, setAutoGenerateOnCopy] = useState(false);
 
+  const passwordRef = useRef(null);
+
   useEffect(() => {
     AOS.init({
       duration: 700,
@@ -25,6 +27,7 @@ function App() {
   }, []);
 
   const copyToClipboard = () => {
+    passwordRef.current?.select();
     navigator.clipboard.writeText(password);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 800);
@@ -63,7 +66,7 @@ function App() {
     <>
       <div className="w-full min-h-screen flex items-center justify-center px-2 sm:px-6 md:px-10 box-border overflow-x-hidden">
         <div
-          className="w-full max-w-2xl p-4 sm:p-8 mx-auto bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 rounded-2xl shadow-lg"
+          className="w-full max-w-3xl p-4 sm:p-8 mx-auto bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 rounded-2xl shadow-lg"
           data-aos="zoom-out"
         >
           <div data-aos="fade-up" data-aos-delay="600">
@@ -72,38 +75,37 @@ function App() {
             </h1>
 
             {/* Password Display */}
-            <div className="flex flex-col xs:flex-row w-full shadow border-2 border-gray-700 rounded-lg overflow-hidden mb-6">
-  <input
-    type="text"
-    value={password}
-    className="flex-1 h-12 text-black bg-amber-100 p-3 text-lg sm:text-xl md:text-2xl font-semibold focus:outline-none w-full"
-    placeholder="Password"
-    readOnly
-  />
+            <div className="flex flex-col md:flex-row w-full shadow border-2 border-gray-700 rounded-lg overflow-hidden mb-6">
+              <input
+                type="text"
+                value={password}
+                className="flex-1 h-12 text-black bg-amber-100 p-3 text-lg sm:text-xl md:text-2xl font-semibold focus:outline-none w-full"
+                placeholder="Password"
+                readOnly
+              />
 
-  {/* Buttons wrapper */}
-  <div className="flex flex-col xs:flex-row w-full xs:w-auto">
-    <button
-      onClick={copyToClipboard}
-      className="h-12 w-full xs:w-1/2 text-black bg-amber-100 hover:bg-amber-200 transition flex items-center justify-center"
-    >
-      <FontAwesomeIcon icon={faCopy} />
-    </button>
-    <button
-      onClick={handleClick}
-      className="h-12 w-full xs:w-1/2 text-black bg-amber-100 hover:bg-amber-200 transition flex items-center justify-center"
-    >
-      <FontAwesomeIcon
-        icon={faRotate}
-        style={{
-          transform: rotated ? "rotate(180deg)" : "rotate(0deg)",
-          transition: "transform 0.3s ease",
-        }}
-      />
-    </button>
-  </div>
-</div>
-
+              {/* Buttons wrapper */}
+              <div className="flex flex-row w-full md:w-auto">
+                <button
+                  onClick={copyToClipboard}
+                  className="h-12 w-full xs:w-1/2 text-black bg-amber-100 hover:bg-amber-200 transition flex items-center justify-center"
+                >
+                  <FontAwesomeIcon icon={faCopy} />
+                </button>
+                <button
+                  onClick={handleClick}
+                  className="h-12 w-full xs:w-1/2 text-black bg-amber-100 hover:bg-amber-200 transition flex items-center justify-center"
+                >
+                  <FontAwesomeIcon
+                    icon={faRotate}
+                    style={{
+                      transform: rotated ? "rotate(180deg)" : "rotate(0deg)",
+                      transition: "transform 0.3s ease",
+                    }}
+                  />
+                </button>
+              </div>
+            </div>
 
             {/* Auto-generate on copy */}
             <div className="flex items-center gap-2 mb-6 justify-center text-xs sm:text-sm md:text-base">
@@ -120,27 +122,27 @@ function App() {
             </div>
 
             {/* Options */}
-            <div className="flex flex-col md:flex-row gap-6 md:gap-8 justify-between items-stretch">
+            <div className="flex flex-col md:flex-row gap-28 justify-between md:justify-between items-start w-full">
               {/* Length Slider */}
-              <div className="flex flex-col items-center md:items-start gap-2 w-full md:w-1/2">
+              <div className="flex flex-row items-center gap-4 w-full md:w-1/2">
                 <input
                   type="range"
                   min={8}
                   max={100}
-                  className="w-full cursor-pointer"
+                  className="w-4xl cursor-pointer"
                   value={length}
                   onChange={(e) => setLength(e.target.value)}
                 />
                 <label
                   htmlFor="length"
-                  className="text-white text-sm sm:text-base"
+                  className="text-white text-sm sm:text-base whitespace-nowrap"
                 >
                   Length: {length}
                 </label>
               </div>
 
               {/* Character Options */}
-              <div className="flex flex-col gap-3 text-xs sm:text-sm md:text-base items-start w-full md:w-1/2">
+              <div className="flex flex-col gap-4 w-full md:w-1/2">
                 <label className="flex items-center gap-2">
                   <input
                     type="checkbox"
