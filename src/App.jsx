@@ -81,6 +81,7 @@ function App() {
                 value={password}
                 className="flex-1 h-12 text-black bg-amber-100 p-3 text-lg sm:text-xl md:text-2xl font-semibold focus:outline-none w-full"
                 placeholder="Password"
+                ref={passwordRef}
                 readOnly
               />
 
@@ -199,7 +200,7 @@ function App() {
         </div>
       )}
     </>
-  );
+    );
 }
 
 export default App;
